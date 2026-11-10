@@ -4,6 +4,7 @@ const myProdoct = [
         img: 'https://images.pexels.com/photos/28879459/pexels-photo-28879459.jpeg',
         prezzo: 89,
         descrizione: 'Scarpa leggera per la corsa, suola in gomma traspirante.',
+        descrizioneDttagliata:'Scarpa da corsa leggera in tonalità grigia, caratterizzata da una tomaia in mesh tecnico altamente traspirante e da un\'intersuola ammortizzata con suola in gomma resistente, ideale per garantire comfort e dinamismo durante l\'allenamento quotidiano.',
         disponibile: true
     },
     {
@@ -11,6 +12,7 @@ const myProdoct = [
         prezzo: 19,
         img: 'https://media.istockphoto.com/id/1591388456/it/foto/mockup-di-t-shirt-per-bambini-piegate-tela-bella-camicie-colorate-vista-frontale-vestiti-per.jpg?b=1&s=612x612&w=0&k=20&c=1AoX7kqdF96LoQ4dbBWuNeFU917qTWBAXG2UUt4YEHY=',
         descrizione: 'Cotone biologico,taglio regolare, disponibile in 6 colori.',
+       descrizioneDttagliata: 'Una T-shirt essenziale in 100% cotone biologico dal taglio regolare e girocollo rinforzato. Disponibile in una versatile palette di 6 tonalità contemporanee (rosso corallo, lavanda, blu scuro, turchese, giallo senape e beige), è il capo perfetto e confortevole per ogni outfit casual.',
         disponibile: true
     },
     {
@@ -18,6 +20,7 @@ const myProdoct = [
         prezzo: 49,
         img: 'https://images.pexels.com/photos/27849638/pexels-photo-27849638.jpeg',
         descrizione: 'Tessuto resistente, tasca interna, cinghia regolabile',
+        descrizioneDttagliata:'Elegante borsa da città trapuntata con patta frontale, chiusura magnetica decorata con logo metallico e pratica tracolla a catena. Realizzata in tessuto resistente con tasca interna, unisce stile e funzionalità in tonalità pastello moderne come azzurro e verde menta.',
         disponibile: true
     },
 ]
@@ -95,7 +98,7 @@ function StampaCard() {
             myDivImgModal.appendChild(myImgModal)
             const myDescModale = document.createElement('p');
             myDescModale.classList.add();
-            myDescModale.textContent = `${item.descrizione}`;
+            myDescModale.textContent = `${item.descrizioneDttagliata}`;
             const myPrezModale = document.createElement('p')
             myPrezModale.classList.add()
             myPrezModale.textContent = `${item.prezzo.toFixed(2)}`;

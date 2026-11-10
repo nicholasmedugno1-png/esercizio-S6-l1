@@ -23,6 +23,30 @@ const myProdoct = [
         descrizioneDttagliata:'Elegante borsa da città trapuntata con patta frontale, chiusura magnetica decorata con logo metallico e pratica tracolla a catena. Realizzata in tessuto resistente con tasca interna, unisce stile e funzionalità in tonalità pastello moderne come azzurro e verde menta.',
         disponibile: true
     },
+    {
+        name: 'Occhiali Sun',
+        prezzo: 35,
+        img: 'https://images.pexels.com/photos/701877/pexels-photo-701877.jpeg',
+        descrizione: 'Montatura leggera, lenti con protezione UV totale.',
+        descrizioneDttagliata: 'Occhiali da sole dal design contemporaneo con montatura ultraleggera e resistente. Le lenti offrono una protezione UV totale per schermare efficacemente i raggi solari, unendo un look glamour a una cura ottimale per la vista.',
+        disponibile: true
+    },
+    {
+        name: 'Orologio Minimal',
+        prezzo: 120,
+        img: 'https://images.pexels.com/photos/1190830/pexels-photo-1190830.jpeg',
+        descrizione: 'Cassa in acciaio, cinturino in pelle, design pulito.',
+        descrizioneDttagliata: 'Orologio da polso dallo stile minimalista ed elegante, caratterizzato da una sottile cassa in acciaio inossidabile, quadrante essenziale e morbido cinturino in vera pelle. Un accessorio versatile perfetto per completare sia look formali che casual.',
+        disponibile: true
+    },
+    {
+        name: 'Portafoglio Slim',
+        prezzo: 39,
+        img: 'https://images.pexels.com/photos/32954513/pexels-photo-32954513.jpeg',
+        descrizione: 'Pelle morbida, scomparti per carte, protezione RFID.',
+        descrizioneDttagliata: 'Portafoglio ultrasottile realizzato in pregiata pelle lavorata a mano, progettato per ridurre l ingombro in tasca. Include molteplici fessure per carte di credito e un sistema di protezione RFID integrato per la sicurezza dei dati personali.',
+        disponibile: true
+    },
 ]
 
 
@@ -76,7 +100,7 @@ function StampaCard() {
             myModalDialog.classList.add('modal-dialog');
             const myModalContent = document.createElement('div');
             myModalContent.classList.add('modal-content');
-
+//HEADER MODALE
             const myModalHead = document.createElement('div');
             myModalHead.classList.add('modal-header');
             const myTitleModal = document.createElement('h2');
@@ -87,7 +111,7 @@ function StampaCard() {
             btnClose.type = 'button';
             btnClose.setAttribute('data-bs-dismiss', 'modal');
             btnClose.setAttribute('aria-label', 'Close');
-
+//BODY MODALE
             const myModalBody = document.createElement('div');
             myModalBody.classList.add('modal-body');
             const myDivImgModal = document.createElement('div');
@@ -103,9 +127,8 @@ function StampaCard() {
             myPrezModale.classList.add()
             myPrezModale.textContent = `${item.prezzo.toFixed(2)}`;
             const mesConf = document.createElement('p');
-
+//FOOTER MODALE
             const myFooterModal = document.createElement('div');
-
             myFooterModal.classList.add('modal-footer');
             const btnChiudiModal = document.createElement('button');
             btnChiudiModal.classList.add('btn', 'btn-secondary');
@@ -114,8 +137,7 @@ function StampaCard() {
             const btnAggiungiCarrello = document.createElement('button');
             btnAggiungiCarrello.classList.add('btn', 'btn-success');
             btnAggiungiCarrello.textContent = 'Aggiungi al carrello'
-            // btnAggiungiCarrello.setAttribute('data-bs-dismiss', 'modal');             
-
+                     
             btnAggiungiCarrello.addEventListener('click', (e) => {
                 myCarrello.push(item);
                 mesConf.textContent = 'Prodotto aggiunto al carrello'

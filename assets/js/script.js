@@ -29,10 +29,10 @@ function StampaCard() {
 
         const myDivCard = document.createElement('div');
         myDivCard.classList.add('border', 'rounded', 'p-3', 'bg-white', 'shadow-sm')
-        myDivCard.style.height = '550px'
+        myDivCard.style.height = '380px'
         const myDivInterno = document.createElement('div');
         myDivInterno.classList.add('bg-secondary', 'mb-2', 'rounded',);
-        myDivInterno.style.height = '70%';
+        myDivInterno.style.height = '50%';
         const myTitleProd = document.createElement('h3');
         myTitleProd.classList.add('fs-5', 'fw-bold', 'm-0');
         myTitleProd.textContent = `${item.name}`

@@ -69,73 +69,72 @@ function StampaCard() {
             myModal.setAttribute('tabindex', '-1');
             myModal.setAttribute('aria-labelledby', 'staticBackdropLabel');
             myModal.setAttribute('aria-hidden', 'true');
-                const myModalDialog = document.createElement('div');
-                myModalDialog.classList.add('modal-dialog');
-                const myModalContent = document.createElement('div');
-                        myModalContent.classList.add('modal-content');
-                    
-                const myModalHead = document.createElement('div');
-                        myModalHead.classList.add('modal-header');
-                        const myTitleModal = document.createElement('h2');
-                        myTitleModal.classList.add('modal-title', 'fs-5');
-                        myTitleModal.textContent = `${item.name}`;
-                        const btnClose = document.createElement('button');
-                        btnClose.classList.add('btn-close');
-                        btnClose.type = 'button';
-                        btnClose.setAttribute('data-bs-dismiss', 'modal');
-                        btnClose.setAttribute('aria-label', 'Close');
+            const myModalDialog = document.createElement('div');
+            myModalDialog.classList.add('modal-dialog');
+            const myModalContent = document.createElement('div');
+            myModalContent.classList.add('modal-content');
 
-                const myModalBody = document.createElement('div');
-                        myModalBody.classList.add('modal-body');
-                        const myDivImgModal = document.createElement('div');
-                        myDivImgModal.classList.add('rounded');
-                        const myImgModal = document.createElement('img')
-                        myImgModal.classList.add('w-100', 'h-100', 'object-fit-cover', 'rounded');
-                        myImgModal.src = `${item.img}`
-                        myDivImgModal.appendChild(myImgModal)
-                        const myDescModale = document.createElement('p');
-                        myDescModale.classList.add();
-                        myDescModale.textContent = `${item.descrizione}`;
-                        const myPrezModale = document.createElement('p')
-                        myPrezModale.classList.add()
-                        myPrezModale.textContent = `${item.prezzo.toFixed(2)}`;
-                        const mesConf = document.createElement('p');
-            
-                const myFooterModal = document.createElement('div');
+            const myModalHead = document.createElement('div');
+            myModalHead.classList.add('modal-header');
+            const myTitleModal = document.createElement('h2');
+            myTitleModal.classList.add('modal-title', 'fs-5');
+            myTitleModal.textContent = `${item.name}`;
+            const btnClose = document.createElement('button');
+            btnClose.classList.add('btn-close');
+            btnClose.type = 'button';
+            btnClose.setAttribute('data-bs-dismiss', 'modal');
+            btnClose.setAttribute('aria-label', 'Close');
 
-                        myFooterModal.classList.add('modal-footer');
-                        const btnChiudiModal = document.createElement('button');
-                        btnChiudiModal.classList.add('btn', 'btn-secondary');
-                        btnChiudiModal.textContent = 'Chiudi';
-                        btnChiudiModal.setAttribute('data-bs-dismiss', 'modal');
-                        const btnAggiungiCarrello = document.createElement('button');
-                        btnAggiungiCarrello.classList.add('btn', 'btn-success');
-                        btnAggiungiCarrello.textContent = 'Aggiungi al carrello'
-                        // btnAggiungiCarrello.setAttribute('data-bs-dismiss', 'modal');             
-                        
-                        btnAggiungiCarrello.addEventListener('click', (e) => {
-                            myCarrello.push(item);
-                            mesConf.textContent = 'Prodotto aggiunto al carrello'
-                             setTimeout(() => {
-        myModalBootstrap.hide()
-    } ,2000)
-                            console.log(myCarrello)
-                        })
+            const myModalBody = document.createElement('div');
+            myModalBody.classList.add('modal-body');
+            const myDivImgModal = document.createElement('div');
+            myDivImgModal.classList.add('rounded');
+            const myImgModal = document.createElement('img')
+            myImgModal.classList.add('w-100', 'h-100', 'object-fit-cover', 'rounded');
+            myImgModal.src = `${item.img}`
+            myDivImgModal.appendChild(myImgModal)
+            const myDescModale = document.createElement('p');
+            myDescModale.classList.add();
+            myDescModale.textContent = `${item.descrizione}`;
+            const myPrezModale = document.createElement('p')
+            myPrezModale.classList.add()
+            myPrezModale.textContent = `${item.prezzo.toFixed(2)}`;
+            const mesConf = document.createElement('p');
 
-             myModal.appendChild(myModalDialog)
-             myModalDialog.appendChild(myModalContent)
-             myModalContent.append(myModalHead, myModalBody, myFooterModal)
-             myModalHead.append(myTitleModal,btnClose);
-             myModalBody.append(myDivImgModal, myDescModale, myPrezModale, mesConf);
-             myFooterModal.append(btnChiudiModal, btnAggiungiCarrello)
-             document.body.appendChild(myModal);
+            const myFooterModal = document.createElement('div');
+
+            myFooterModal.classList.add('modal-footer');
+            const btnChiudiModal = document.createElement('button');
+            btnChiudiModal.classList.add('btn', 'btn-secondary');
+            btnChiudiModal.textContent = 'Chiudi';
+            btnChiudiModal.setAttribute('data-bs-dismiss', 'modal');
+            const btnAggiungiCarrello = document.createElement('button');
+            btnAggiungiCarrello.classList.add('btn', 'btn-success');
+            btnAggiungiCarrello.textContent = 'Aggiungi al carrello'
+            // btnAggiungiCarrello.setAttribute('data-bs-dismiss', 'modal');             
+
+            btnAggiungiCarrello.addEventListener('click', (e) => {
+                myCarrello.push(item);
+                mesConf.textContent = 'Prodotto aggiunto al carrello'
+                setTimeout(() => {
+                    myModalBootstrap.hide()
+                }, 2000)
+                console.log(myCarrello)
+            })
+
+            myModal.appendChild(myModalDialog)
+            myModalDialog.appendChild(myModalContent)
+            myModalContent.append(myModalHead, myModalBody, myFooterModal)
+            myModalHead.append(myTitleModal, btnClose);
+            myModalBody.append(myDivImgModal, myDescModale, myPrezModale, mesConf);
+            myFooterModal.append(btnChiudiModal, btnAggiungiCarrello)
+            document.body.appendChild(myModal);
 
             //  si trova nella documentazione ufficiale alla sezione Modal -> Methods
-             const myModalBootstrap = new bootstrap.Modal(myModal); //dice di prendere l elemento appena creato a volo e renderlo una modale
+            const myModalBootstrap = new bootstrap.Modal(myModal); //dice di prendere l elemento appena creato a volo e renderlo una modale
             myModalBootstrap.show();  //Comando per far apparire la modale con l animazione fade
-            })
+        })
     });
 }
-
 
 StampaCard()

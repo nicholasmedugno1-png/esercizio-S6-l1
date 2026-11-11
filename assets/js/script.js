@@ -199,5 +199,69 @@ function mostraSchermataGiusta(idSchermata) {
 const BtnShop = document.querySelector('#BtnShop');
 BtnShop.addEventListener('click', (e) => {
     mostraSchermataGiusta('mostraSchermataCarrello')
-    stampaCard(myCarrello, mycontainerShop)
+    creaSchermataCarrello(myCarrello)
 })
+
+
+function creaSchermataCarrello(array) {
+
+if (array.length === 0) {
+        mycontainerShop.textContent = 'Il tuo carrello è vuoto!';
+        return;
+    }
+
+    const myElementShop = document.createElement('ul')
+    array.forEach((item) => {
+        const myli = document.createElement('li');
+        myli.classList.add('list-group-item', 'd-flex', 'align-items-center', 'justify-content-between', 'p-3', 'border', 'rounded', 'mb-2')
+        const myDivImgShop = document.createElement('div')
+         myDivImgShop.classList.add('flex-shrink-0', 'me-3')
+         myDivImgShop.style.width = '70px';
+        myDivImgShop.style.height = '70px';
+
+        const myImgShop= document.createElement ('img');
+        myImgShop.src = `${item.img}`
+         myImgShop.classList.add('w-100', 'h-100', 'object-fit-cover', 'rounded')
+        
+
+        const myDivDescShop = document.createElement('div') 
+         myDivDescShop.classList.add('flex-grow-1', 'me-3');
+        const myNameShop = document.createElement('h5');
+        myNameShop.textContent = `${item.name}`
+        myNameShop.classList.add('fs-6', 'fw-bold', 'mb-1')
+        const myDescShop = document.createElement('p');
+        myDescShop.textContent = `${item.descrizione}`;
+        myDescShop.classList.add('text-muted', 'small', 'mb-1');
+        const myPrezShop = document.createElement('p');
+        myPrezShop.textContent = `€ ${item.prezzo.toFixed(2)}`
+        myPrezShop.classList.add('fw-bold', 'text-primary');
+        const myDivQty = document.createElement('div');
+myDivQty.classList.add('input-group', 'input-group-sm', 'w-auto');
+// input quantita' prodotti
+const myDivInputQty = document.createElement('div');
+myDivQty.classList.add('input-group', 'input-group-sm', 'w-auto');
+const btnMeno = document.createElement('button');
+btnMeno.classList.add('btn', 'btn-outline-secondary');
+btnMeno.textContent = '-';
+const inputQty = document.createElement('input');
+inputQty.type = 'text';
+inputQty.classList.add('form-control', 'text-center');
+const btnPiu = document.createElement('button');
+btnPiu.classList.add('btn', 'btn-outline-secondary');
+btnPiu.textContent = '+';
+myDivInputQty.append(btnMeno, inputQty, btnPiu)
+
+        const myDivBtnShop = document.createElement('div');
+         myDivBtnShop.classList.add('flex-shrink-0');
+         const btnEliminaShop = document.createElement('button');
+         btnEliminaShop.textContent ='❌'
+        btnEliminaShop.classList.add('btn', 'btn-outline-danger', 'btn-sm');
+
+            myDivImgShop.appendChild(myImgShop);
+            myDivDescShop.append(myNameShop, myDescShop , myPrezShop, myDivInputQty);
+            myDivBtnShop.append(btnEliminaShop)
+            myli.append(myDivImgShop, myDivDescShop , myDivBtnShop)
+            myElementShop.append(myli)
+            mycontainerShop.append(myElementShop)
+        })
+};

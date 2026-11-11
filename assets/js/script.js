@@ -198,6 +198,6 @@ function mostraSchermataGiusta(idSchermata) {
 
 const BtnShop = document.querySelector('#BtnShop');
 BtnShop.addEventListener('click', (e) => {
-    mostraSchermataGiusta('mostraSchermataCarrello  ')
+    mostraSchermataGiusta('mostraSchermataCarrello')
     stampaCard(myCarrello, mycontainerShop)
 })

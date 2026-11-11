@@ -52,11 +52,14 @@ const myProdoct = [
 
 const myCarrello = [];
 
+const numCarrello = document.querySelector('#numCarrello')
 const myContainerCard = document.querySelector('#containerCard')
-function StampaCard() {
+const mycontainerShop = document.querySelector('#containerShop')
+const mostraSchermataCarrello = document.querySelector('#mostraSchermataCarrello')
 
-    myProdoct.forEach((item, i) => {
-        let prodottoCorrente = item[i]
+function stampaCard(array, contenitorePadre) {
+    contenitorePadre.textContent = ''
+    array.forEach((item, i) => {
         const myArt = document.createElement('article');
         myArt.classList.add('col-12', 'col-sm-6', 'col-xl-4', 'mb-3')
 
@@ -86,7 +89,7 @@ function StampaCard() {
 
         myDivCard.append(myDivInterno, myTitleProd, myDescri, myPrez, btnModalCard);
         myArt.appendChild(myDivCard);
-        myContainerCard.appendChild(myArt)
+        contenitorePadre.appendChild(myArt)
 
         btnModalCard.addEventListener('click', (e) => {
             const myModal = document.createElement('div')
@@ -140,6 +143,7 @@ function StampaCard() {
                      
             btnAggiungiCarrello.addEventListener('click', (e) => {
                 myCarrello.push(item);
+             numCarrello.textContent = `${myCarrello.length}`
                 mesConf.textContent = '✅ Prodotto aggiunto al carrello'
                 setTimeout(() => {
                     myModalBootstrap.hide()
@@ -162,11 +166,12 @@ function StampaCard() {
     });
 }
 
-StampaCard()
-const myIcon = document.querySelector('#toogleDark')
+stampaCard(myProdoct, myContainerCard);
+
 const checkNativeSwitch = document.querySelector('#checkNativeSwitch');
-const myHtml = document.querySelector('html')
 checkNativeSwitch.addEventListener('change', (e) => {
+    const myIcon = document.querySelector('#toogleDark')
+    const myHtml = document.querySelector('html')
     if (myHtml.getAttribute('data-bs-theme') === 'dark') {
         myHtml.setAttribute('data-bs-theme', 'light');
         myIcon.classList.add('fa-moon', 'text-dark');
@@ -176,4 +181,23 @@ checkNativeSwitch.addEventListener('change', (e) => {
         myIcon.classList.remove('fa-moon', 'text-dark');
         myHtml.setAttribute('data-bs-theme', 'dark');
     }
+});
+
+function mostraSchermataGiusta(idSchermata) {
+  //FUNZIONE PER CAMBIARE SCHERMATA IN SPA PASSARE ID DELLA SCHERMATA
+  const tutteLeSchermate = document.querySelectorAll('.schermata');
+  tutteLeSchermate.forEach((schermata) => {
+    //assegniamo la classe per nascondere tutte le schermate
+    schermata.classList.add('nascosto');
+  });
+  const schermataDaMostrare = document.getElementById(idSchermata);
+  if (schermataDaMostrare) {
+    schermataDaMostrare.classList.remove('nascosto'); //rimuoviamo la classe che la nasconde a schermo
+  }
+}
+
+const BtnShop = document.querySelector('#BtnShop');
+BtnShop.addEventListener('click', (e) => {
+    mostraSchermataGiusta('mostraSchermataCarrello  ')
+    stampaCard(myCarrello, mycontainerShop)
 })

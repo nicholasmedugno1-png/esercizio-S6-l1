@@ -61,7 +61,7 @@ function StampaCard() {
         myArt.classList.add('col-12', 'col-sm-6', 'col-xl-4', 'mb-3')
 
         const myDivCard = document.createElement('div');
-        myDivCard.classList.add('border', 'rounded', 'p-3', 'bg-white', 'shadow-sm')
+        myDivCard.classList.add('border', 'rounded', 'p-3', 'shadow-sm')
         myDivCard.style.height = '380px'
         const myDivInterno = document.createElement('div');
         myDivInterno.classList.add('bg-secondary', 'mb-2', 'rounded',);
@@ -125,7 +125,7 @@ function StampaCard() {
             myDescModale.textContent = `${item.descrizioneDttagliata}`;
             const myPrezModale = document.createElement('p')
             myPrezModale.classList.add()
-            myPrezModale.textContent = `${item.prezzo.toFixed(2)}`;
+            myPrezModale.textContent = `€ ${item.prezzo.toFixed(2)}`;
             const mesConf = document.createElement('p');
 //FOOTER MODALE
             const myFooterModal = document.createElement('div');
@@ -140,7 +140,7 @@ function StampaCard() {
                      
             btnAggiungiCarrello.addEventListener('click', (e) => {
                 myCarrello.push(item);
-                mesConf.textContent = 'Prodotto aggiunto al carrello'
+                mesConf.textContent = '✅ Prodotto aggiunto al carrello'
                 setTimeout(() => {
                     myModalBootstrap.hide()
                 }, 2000)
@@ -163,3 +163,17 @@ function StampaCard() {
 }
 
 StampaCard()
+const myIcon = document.querySelector('#toogleDark')
+const checkNativeSwitch = document.querySelector('#checkNativeSwitch');
+const myHtml = document.querySelector('html')
+checkNativeSwitch.addEventListener('change', (e) => {
+    if (myHtml.getAttribute('data-bs-theme') === 'dark') {
+        myHtml.setAttribute('data-bs-theme', 'light');
+        myIcon.classList.add('fa-moon', 'text-dark');
+        myIcon.classList.remove('fa-sun')
+    } else {
+        myIcon.classList.add('fa-sun')
+        myIcon.classList.remove('fa-moon', 'text-dark');
+        myHtml.setAttribute('data-bs-theme', 'dark');
+    }
+})

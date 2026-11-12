@@ -8,6 +8,7 @@ const myProdoct = [
         disponibile: true,
         numCarrello: 0,
         inOfferta: true,
+        categoria: 'scarpe',
     },
     {
         name: 'T-shirt basic',
@@ -18,6 +19,7 @@ const myProdoct = [
         disponibile: true,
         numCarrello: 0,
         inOfferta: true,
+        categoria: 'abbigliamento',
     },
     {
         name: 'Borsa city',
@@ -28,6 +30,7 @@ const myProdoct = [
         disponibile: true,
         numCarrello: 0,
         inOfferta: true,
+        categoria: 'accessori',
     },
     {
         name: 'Occhiali Sun',
@@ -38,6 +41,7 @@ const myProdoct = [
         disponibile: true,
         numCarrello: 0,
         inOfferta: true,
+        categoria: 'accessori',
     },
     {
         name: 'Orologio Minimal',
@@ -48,6 +52,7 @@ const myProdoct = [
         disponibile: true,
         numCarrello: 0,
         inOfferta: true,
+        categoria: 'accessori'
     },
     {
         name: 'Portafoglio Slim',
@@ -58,6 +63,51 @@ const myProdoct = [
         disponibile: true,
         numCarrello: 0,
         inOfferta: true,
+        categoria: 'accessori',
+    },
+    {
+        name: 'Smartwatch Sportivo',
+        prezzo: 79,
+        img: 'https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg',
+        descrizione: 'Display AMOLED, monitoraggio fitness, resistenza all acqua.',
+        descrizioneDttagliata: 'Smartwatch leggero e dal design moderno con display AMOLED ad alta risoluzione. Offre tracciamento avanzato dell attività fisica, frequenza cardiaca 24/7, monitoraggio del sonno e notifiche smart direttamente al polso.',
+        disponibile: true,
+        numCarrello: 0,
+        inOfferta: false,
+        categoria: 'elettronica'
+    },
+    {
+        name: 'Auricolari Wireless',
+        prezzo: 49,
+        img: 'https://media.istockphoto.com/id/2237358070/it/foto/cuffie-wireless-moderne-bianche-isolate-su-sfondo-bianco-spazio-di-copia.jpg?b=1&s=612x612&w=0&k=20&c=K94sgg-RsRZqGFSUy7Bdi8-KD5PYXwfAGi3i8HeMr8w=',
+        descrizione: 'Cancellazione del rumore, custodia di ricarica, audio hi-fi.',
+        descrizioneDttagliata: 'Auricolari in-ear ergonomici con tecnologia di cancellazione attiva del rumore e driver dinamici per un suono cristallino e bassi profondi. La custodia di ricarica compatta garantisce fino a 24 ore di autonomia totale.',
+        disponibile: true,
+        numCarrello: 0,
+        inOfferta: true,
+        categoria: 'elettronica'
+    },
+    {
+        name: 'Felpa con Cappuccio',
+        prezzo: 45,
+        img: 'https://media.istockphoto.com/id/1286846961/it/foto/modello-di-felpa-grigia-con-cappuccio-felpa-con-cappuccio-a-manica-lunga-con-percorso-di.jpg?b=1&s=612x612&w=0&k=20&c=R8SsaaoF8JGudP1Xk4HRdyKCzaSYH9ooyrX4cCPPT1I=',
+        descrizione: 'Caldo cotone felpato, tasca centrale, fit comodo.',
+        descrizioneDttagliata: 'Felpa unisex dal taglio regular fit realizzata in morbido cotone felpato misto poliestere. Dotata di un ampio cappuccio con coulisse regolabile e di una pratica tasca a marsupio frontale, ideale per le giornate più fredde.',
+        disponibile: true,
+        numCarrello: 0,
+        inOfferta: false,
+        categoria: 'abbigliamento'
+    },
+    {
+        name: 'Stivaletti in Pelle',
+        prezzo: 95,
+        img: 'https://images.pexels.com/photos/6046212/pexels-photo-6046212.jpeg',
+        descrizione: 'Pelle martellata, suola carrarmato, chiusura con zip.',
+        descrizioneDttagliata: 'Stivaletti da donna in vera pelle martellata con robusta suola carrarmato antiscivolo. Caratterizzati da una comoda chiusura interna con zip e dettagli elastici laterali per una calzata pratica e veloce.',
+        disponibile: true,
+        numCarrello: 0,
+        inOfferta: true,
+        categoria: 'scarpe'
     },
 ]
 
@@ -71,10 +121,15 @@ const mostraSchermataCarrello = document.querySelector('#mostraSchermataCarrello
 const btnProd = document.querySelector('#btnProd')
 const mostraSchermataCard = document.querySelector('#mostraSchermataCard')
 
+const btnFilter = document.querySelectorAll('.btnFilter')
+let indexIniziale = 0;
+let cardPerPage = 9;
 
 function stampaCard(array, contenitorePadre) {
     contenitorePadre.textContent = ''
-    array.forEach((item, i) => {
+    let indexFinale = indexIniziale + cardPerPage
+    const arrayDaStampare = array.slice(indexIniziale, indexFinale)
+    arrayDaStampare.forEach((item, i) => {
         const myArt = document.createElement('article');
         myArt.classList.add('col-12', 'col-sm-6', 'col-xl-4', 'mb-3')
 
@@ -159,19 +214,19 @@ function stampaCard(array, contenitorePadre) {
             btnAggiungiCarrello.addEventListener('click', (e) => {
                 btnAggiungiCarrello.disabled = true;
 
-                if(myCarrello.includes(item)) {
+                if (myCarrello.includes(item)) {
                     item.numCarrello++
-                }else {
+                } else {
 
                     item.numCarrello++
                     myCarrello.push(item);
                 }
-                    numCarrello.textContent = `${myCarrello.length}`
-                    mesConf.textContent = '✅ Prodotto aggiunto al carrello'
-                    setTimeout(() => {
-                        myModalBootstrap.hide()
-                    }, 2000)
-                    console.log(myCarrello)
+                numCarrello.textContent = `${myCarrello.length}`
+                mesConf.textContent = '✅ Prodotto aggiunto al carrello'
+                setTimeout(() => {
+                    myModalBootstrap.hide()
+                }, 2000)
+                console.log(myCarrello)
             })
 
             myModal.appendChild(myModalDialog)
@@ -185,8 +240,11 @@ function stampaCard(array, contenitorePadre) {
             //  si trova nella documentazione ufficiale alla sezione Modal -> Methods
             const myModalBootstrap = new bootstrap.Modal(myModal); //dice di prendere l elemento appena creato a volo e renderlo una modale
             myModalBootstrap.show();  //Comando per far apparire la modale con l animazione fade
+            console.log(indexIniziale)
+            console.log(indexFinale)
         })
     });
+    indexIniziale = indexFinale
 }
 
 stampaCard(myProdoct, myContainerCard);
@@ -317,6 +375,7 @@ function creaSchermataCarrello(array) {
 
 btnProd.addEventListener('click', (e) => {
     mostraSchermataGiusta('mostraSchermataCard')
+    indexIniziale = 0;
     stampaCard(myProdoct, myContainerCard);
 })
 
@@ -324,3 +383,25 @@ function calcoloPrezzo(item) {
     const sommaPiuProdotti = Number(item.prezzo * item.numCarrello)
     return sommaPiuProdotti
 }
+
+function filterProd(category) {
+    if (category === 'tutto') {
+        return myProdoct
+    }
+    return myProdoct.filter(item => item.categoria === category)
+}
+
+
+
+btnFilter.forEach(button => {
+    button.addEventListener('click', (e) => {
+        let category = e.target.textContent.trim().toLowerCase();
+        const arrayFiltrato = filterProd(category)
+        indexIniziale = 0;
+        stampaCard(arrayFiltrato, myContainerCard)
+
+    })
+
+})
+
+

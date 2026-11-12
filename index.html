@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav justify-content-center  align-item-center">
                         <li class="nav-item">
-                            <a class=" text-light nav-link active" aria-current="page" href="#">Prodotti</a>
+                            <a id="btnProd" class=" text-light nav-link active" aria-current="page" href="#">Prodotti</a>
                         </li>
                         <li class="nav-item">
                             <a class="text-light nav-link" href="#">Offerte</a>
@@ -120,16 +120,25 @@
                 </aside>
 
                 <section class=" col-12 col-lg-9">
-                    <div class="schermata">
+                    <div id="mostraSchermataCard" class="schermata">
                         <h2 id="prodotti" class=" order-1 fs-3 fw-bold mb-4 text-center text-md-start">Prodotti in
                             evidenza<span class="badge text-bg-danger py-1 mx-2">-30%</span></h2>
-                        <div id="containerCard" class="row ">
+                        <div id="containerCard" class="row">
 
                         </div>
                     </div>
                     <div id="mostraSchermataCarrello" class="schermata nascosto">
-                        <h2 id="prodotti" class=" fs-3 fw-bold mb-4 text-center text-md-start">Prodotti nel
-                            carrello</h2>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 id="prodotti" class=" fs-3 fw-bold mb-4 text-center text-md-start">Prodotti nel
+                                carrello</h2>
+                                <div class="card p-2 mb-1 justify-content-center">
+
+                                    <p class="me-2 small">somma Carrello : <span id="sommaShop"></span>€ 170</p>
+                                    <button class="btn btn-warning">Svuota Carrello</button>
+                                </div>
+                                
+                            </div>
                         <div id="containerShop" class="row ">
 
                         </div>

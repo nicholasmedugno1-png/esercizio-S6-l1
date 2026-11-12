@@ -1,0 +1,38 @@
+.navbar-toggler:focus {
+box-shadow: 0 0 0 2px white !important;
+}
+
+.nascosto {
+    display: none;
+};
+
+
+
+@mixin btnShop {
+    display: flex;
+    align-items: center;
+    height: 25px;
+    width: 20px;
+    padding: 3px 4px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    background-color: inherit;
+}
+
+.myBtnMenoShop {
+    @include btnShop();
+}
+
+.myInputShop {
+@include btnShop();
+    border-radius: 0%
+}  
+
+.myBtnPiuShop {
+@include btnShop();
+}  
+
+.myDivInputQty {
+    
+    width: 60px;
+    flex-wrap: nowrap;
+}

@@ -134,10 +134,10 @@ function stampaCard(array, contenitorePadre) {
         myArt.classList.add('col-12', 'col-sm-6', 'col-xl-4', 'mb-3')
 
         const myDivCard = document.createElement('div');
-        myDivCard.classList.add('border', 'rounded', 'p-3', 'shadow-sm')
+        myDivCard.classList.add('border', 'rounded', 'p-3', 'shadow-sm', 'd-flex', 'row', 'g-1')
         myDivCard.style.height = '380px'
         const myDivInterno = document.createElement('div');
-        myDivInterno.classList.add('bg-secondary', 'mb-2', 'rounded',);
+        myDivInterno.classList.add('bg-secondary', 'mb-2', 'rounded');
         myDivInterno.style.height = '50%';
         const myImgPro = document.createElement('img');
         myImgPro.classList.add('w-100', 'h-100', 'object-fit-cover', 'rounded');
@@ -154,7 +154,7 @@ function stampaCard(array, contenitorePadre) {
         myPrez.classList.add('fw-bold', 'm-0', 'mb-2');
         myPrez.textContent = `€ ${item.prezzo.toFixed(2)}`;
         const btnModalCard = document.createElement('button');
-        btnModalCard.classList.add('btn', 'btn-primary', 'w-100');
+        btnModalCard.classList.add('btn', 'btn-primary', 'w-100', 'mt-auto');
         btnModalCard.textContent = 'Dettagli'
 
         myDivCard.append(myDivInterno, myTitleProd, myDescri, myPrez, btnModalCard);

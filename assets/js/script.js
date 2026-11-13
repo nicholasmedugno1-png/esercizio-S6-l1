@@ -120,6 +120,8 @@ const mycontainerShop = document.querySelector('#containerShop')
 const mostraSchermataCarrello = document.querySelector('#mostraSchermataCarrello')
 const btnProd = document.querySelector('#btnProd')
 const mostraSchermataCard = document.querySelector('#mostraSchermataCard')
+const spanSommaCarrello = document.querySelector('#sommaCarrello')
+const btnSvuotaShop = document.querySelector('#btnSvuotaShop')
 
 const btnFilter = document.querySelectorAll('.btnFilter')
 let indexIniziale = 0;
@@ -213,13 +215,16 @@ function stampaCard(array, contenitorePadre) {
 
             btnAggiungiCarrello.addEventListener('click', (e) => {
                 btnAggiungiCarrello.disabled = true;
-
                 if (myCarrello.includes(item)) {
                     item.numCarrello++
+                    spanSommaCarrello + item.prezzo
+                    aggiornaBadgeCarrello()
                 } else {
 
                     item.numCarrello++
                     myCarrello.push(item);
+                    sommaCarrello()
+                    aggiornaBadgeCarrello()
                 }
                 numCarrello.textContent = `${myCarrello.length}`
                 mesConf.textContent = '✅ Prodotto aggiunto al carrello'
@@ -240,8 +245,8 @@ function stampaCard(array, contenitorePadre) {
             //  si trova nella documentazione ufficiale alla sezione Modal -> Methods
             const myModalBootstrap = new bootstrap.Modal(myModal); //dice di prendere l elemento appena creato a volo e renderlo una modale
             myModalBootstrap.show();  //Comando per far apparire la modale con l animazione fade
-            console.log(indexIniziale)
-            console.log(indexFinale)
+            console.log(`index inziale :${indexIniziale}`)
+            console.log(`index finale :${indexFinale}`)
         })
     });
     indexIniziale = indexFinale
@@ -289,6 +294,8 @@ function creaSchermataCarrello(array) {
 
     if (array.length === 0) {
         mycontainerShop.textContent = 'Il tuo carrello è vuoto!';
+        sommaCarrello();
+        aggiornaBadgeCarrello()
         return;
     }
 
@@ -335,14 +342,25 @@ function creaSchermataCarrello(array) {
         myDivInputQty.append(btnMeno, inputQty, btnPiu)
 
         btnMeno.addEventListener('click', (e) => {
-            item.numCarrello--
-            inputQty.value = `${item.numCarrello}`
-            myPrezShop.textContent = `€ ${calcoloPrezzo(item).toFixed(2)}`
+            if (item.numCarrello > 0) {
+                item.numCarrello--;
+            }
+            inputQty.value = item.numCarrello;
+            if (item.numCarrello === 0) {
+                myCarrello.splice(index, 1);
+                creaSchermataCarrello(myCarrello);
+            } else { myPrezShop.textContent = `€ ${calcoloPrezzo(item).toFixed(2)}`; }
+            sommaCarrello()
+            aggiornaBadgeCarrello()
+            
         })
+
         btnPiu.addEventListener('click', (e) => {
             item.numCarrello++
             inputQty.value = `${item.numCarrello}`
             myPrezShop.textContent = `€ ${calcoloPrezzo(item).toFixed(2)}`
+            sommaCarrello()
+            aggiornaBadgeCarrello()
         })
 
         const myDivBtnShop = document.createElement('div');
@@ -358,7 +376,8 @@ function creaSchermataCarrello(array) {
             mycontainerShop.textContent = ''
             creaSchermataCarrello(array)
 
-            numCarrello.textContent = myCarrello.length
+            sommaCarrello()
+            aggiornaBadgeCarrello()
             console.log(myCarrello)
         })
 
@@ -368,8 +387,11 @@ function creaSchermataCarrello(array) {
         myDivBtnShop.append(btnEliminaShop)
         myLi.append(myDivImgShop, myDivDescShop, myDivBtnShop)
         myElementShop.append(myLi)
-        mycontainerShop.append(myElementShop)
     })
+    
+    mycontainerShop.append(myElementShop)
+    sommaCarrello();
+    aggiornaBadgeCarrello();
 };
 
 
@@ -383,6 +405,19 @@ function calcoloPrezzo(item) {
     const sommaPiuProdotti = Number(item.prezzo * item.numCarrello)
     return sommaPiuProdotti
 }
+function sommaCarrello(item) {
+    const totaleCarrello = myCarrello.reduce((acc, prodotto) => acc + (prodotto.prezzo * prodotto.numCarrello), 0);
+    if (spanSommaCarrello) {
+        spanSommaCarrello.textContent = `€ ${totaleCarrello.toFixed(2)}`;
+    }
+}
+
+function calcoloPrezzoSinoloProdotto(item) {
+    return Number(item.prezzo * item.numCarrello)
+}
+
+console.log(`qiesa e lo span somma carrello:${spanSommaCarrello}`)
+
 
 function filterProd(category) {
     if (category === 'tutto') {
@@ -391,6 +426,12 @@ function filterProd(category) {
     return myProdoct.filter(item => item.categoria === category)
 }
 
+function aggiornaBadgeCarrello() {
+    const quantitaTotale = myCarrello.reduce((acc, item) => acc + item.numCarrello, 0);
+    if (numCarrello) {
+        numCarrello.textContent = quantitaTotale;
+    }
+}
 
 
 btnFilter.forEach(button => {
@@ -404,4 +445,12 @@ btnFilter.forEach(button => {
 
 })
 
-
+btnSvuotaShop.addEventListener('click', (e) => {
+   myCarrello.forEach(item => {
+        item.numCarrello = 0;
+    });
+    myCarrello.length = 0;
+    creaSchermataCarrello(myCarrello);
+    sommaCarrello();
+    aggiornaBadgeCarrello();
+})
